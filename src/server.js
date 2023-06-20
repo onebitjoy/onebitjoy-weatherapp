@@ -1,11 +1,13 @@
-import express, { static as as_static } from 'express'
+const express = require('express')
 const app = express()
-import { geocode } from './utils/geocoding.js'
-import { weather_func } from './utils/weather.js'
-import path from 'path'
-import { fileURLToPath } from 'url';
-import hbs from 'hbs'
-import { log } from 'console'
+const { geocode } =  require('./utils/geocoding.js')
+const { weather_func } = require('./utils/weather.js')
+const path  = require('path')
+const {fileURLToPath } = require('url')
+const hbs =  require('hbs')
+const { log } =  require('console')
+
+
 
 // __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +26,7 @@ app.set('views', views_path)
 
 // static folder
 const public_path = path.join(__dirname, '../../public')
-app.use(as_static(public_path))
+app.use(express.static(public_path))
 
 //HOME 
 app.get('', (req, res) => {
