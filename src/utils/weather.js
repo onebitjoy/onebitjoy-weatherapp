@@ -1,5 +1,5 @@
-import request from 'postman-request'
-import error from 'console'
+const request = require('postman-request')
+const {error} = require('console')
 
 const weather = (geo_data, callback) => {
 

@@ -1,5 +1,4 @@
-import request from 'postman-request'
-
+const request = require('postman-request')
 const geocoding_city = (city = "", callback) => {
 
     const geo_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(city) + '.json?' + 'proximity=ip' + '&access_token=' + process.env.mapbox_key+ '&limit=1'
