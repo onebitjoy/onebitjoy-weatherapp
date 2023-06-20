@@ -7,12 +7,6 @@ const {fileURLToPath } = require('url')
 const hbs =  require('hbs')
 const { log } =  require('console')
 
-
-
-// __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 // views
 const views_path = path.join(__dirname, '../../templates/views')
 // partials
