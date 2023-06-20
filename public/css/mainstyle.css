@@ -1,0 +1,83 @@
+    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    body {
+      background-color: #181819;
+    }
+
+    .container {
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #map {
+      border: none;
+      outline: none;
+      height: 1000px;
+      width: 70%;
+      max-height: 1000px;
+      background-color: #333131;
+    }
+
+    #forecast {
+      height: inherit;
+      width: 30%;
+      background-color: rgb(70, 13, 13);
+    }
+
+    .map_container {
+      width: 80%;
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    form {
+      display: flex;
+      width: 1500px;
+    }
+
+    input {
+      flex-grow: 1;
+      padding-left: 2rem;
+      margin-right: 20px;
+      color: black;
+      outline: none;
+      border: none;
+      border-radius: 2rem;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      width: 200px;
+      padding: 16px;
+      color: rgb(29, 28, 28);
+      border-radius: 999px;
+    }
+
+    button:hover {
+      box-shadow: 0px 0px 20px #e2e605,
+        0px 0px 20px #e9d207;
+      color: rgb(29, 28, 28);
+      text-shadow: 2px 0px 10px black;
+    }
+
+    .title {
+      font-size: 60px;
+      margin: 20px auto 20px 40px;
+      font-family: 'Acme', sans-serif;
+      color: antiquewhite;
+    }

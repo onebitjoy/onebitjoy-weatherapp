@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <link rel="stylesheet" href="css\leaflet.css" />
+  <link rel="stylesheet" href="css\mainstyle.css" />
+
+</head>
+
+<body>
+
+  <h1 class="title">Weatherium</h1>
+
+  <div class="container">
+
+    <div class="map_container">
+      <div id="map">
+        <div id="inmap" style="height: 100%; width:100%;background-color:wheat"></div>
+      </div>
+      <div id="forecast"></div>
+    </div>
+
+    <form>
+      <input type="text" placeholder="Enter city" id="forminput" autocomplete="off">
+      <button id="submit">Submit</button>
+    </form>
+
+    <script src="js\leaflet.js"></script>
+    <script src="js\app.js" type="module"></script>
+
+    <script>
+      const latitude = 28.70
+      const longitude = 77.10
+      const map = L.map('inmap')
+      map.setView([latitude, longitude], 4)
+
+      const Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 1,
+        maxZoom: 16,
+        ext: 'jpg'
+      });
+
+      Stamen_Watercolor.addTo(map);
+
+      var myIcon = L.icon({
+        iconUrl: "images\\heart.png",
+        iconSize: [40, 40],
+      });
+
+      const marker = L.marker([latitude, longitude], { icon: myIcon }).addTo(map);
+    
+    </script>
+  </div>
+
+</body>
+
+</html>
