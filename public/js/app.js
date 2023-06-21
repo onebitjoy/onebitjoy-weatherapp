@@ -1,7 +1,4 @@
 const input_form = document.querySelector('form')
-import dotenv from 'dotenv'
-const {config} = dotenv
-config({path:"../../.env"})
 
 // new map that will overlap the existing map
 // -----------------------------------------------
@@ -52,7 +49,7 @@ const fetcher = (address, map) => {
       L.marker([lat, lon], { icon: myIcon }).addTo(map);
 
       // temperature map
-      const temp_map = L.tileLayer('https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid={apikey}', {
+      const temp_map = L.tileLayer('https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ apikey, {
         apikey: process.env.OPENWEATHERMAP_KEY,
         maxZoom: 19,
         opacity: 0.6,
