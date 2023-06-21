@@ -29,7 +29,7 @@ const fetcher = (address, map) => {
   fetch("/weather?address=" + address).then((response) => {
     response.json().then((data) => {
 
-      log(data)
+      console.log(data)
 
       const { lat, lon } = data.coord
       const { name } = data
