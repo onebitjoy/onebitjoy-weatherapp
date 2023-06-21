@@ -1,83 +1,75 @@
-    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
 
-    body {
-      background-color: #181819;
-    }
+.map{
+  background:rgba(91, 213, 250, 0.74);
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    .container {
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+.overlay {
+  height: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(241, 240, 240, 0.863);
+  backdrop-filter: blur(100px);
+  border-bottom: 5px solid black;
+}
 
-    #map {
-      border: none;
-      outline: none;
-      height: 800px;
-      width: 70%;
-      max-height: 1000px;
-      background-color: #333131;
-    }
+.search {
+  flex-grow: 1;
+  display: flex;
+}
 
-    #forecast {
-      height: inherit;
-      width: 30%;
-      background-color: rgb(70, 13, 13);
-    }
+#city {
+  width: 90%;
+  max-width: 1800px;
+  height: 1.5rem;
+  padding: 5px;
+  margin-right: 1rem;
+  border: none;
+  outline: none;
+  background-color: rgb(241, 240, 240);
+  backdrop-filter: blur(5px);
+}
 
-    .map_container {
-      width: 80%;
-      margin-bottom: 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-    }
 
-    form {
-      display: flex;
-      width: 1500px;
-    }
 
-    input {
-      flex-grow: 1;
-      padding-left: 2rem;
-      margin-right: 20px;
-      color: black;
-      outline: none;
-      border: none;
-      border-radius: 2rem;
-    }
+#submitbtn {
+  outline: none;
+  border: none;
+  width: 7.5rem;
+  border-radius: 20px;
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
 
-    button {
-      border: none;
-      outline: none;
-      width: 200px;
-      padding: 16px;
-      color: rgb(29, 28, 28);
-      border-radius: 999px;
-    }
+#submitbtn:hover {
+  background-position: right center;
+}
 
-    button:hover {
-      box-shadow: 0px 0px 20px #e2e605,
-        0px 0px 20px #e9d207;
-      color: rgb(29, 28, 28);
-      text-shadow: 2px 0px 10px black;
-    }
+#inside {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0 1rem 0 1rem;
+}
 
-    .title {
-      font-size: 60px;
-      margin: 20px auto 20px 40px;
-      font-family: 'Acme', sans-serif;
-      color: antiquewhite;
-    }
+#map {
+  flex-grow: 1;
+  width: 100%;
+}

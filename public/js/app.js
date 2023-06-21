@@ -1,4 +1,4 @@
-const input_form = document.querySelector('form')
+const input_form = document.querySelector('.search')
 
 // new map that will overlap the existing map
 // -----------------------------------------------
@@ -6,13 +6,14 @@ input_form.addEventListener('submit', (event) => {
 
   event.preventDefault()
 
-  let city = document.querySelector('#forminput')
+  let city = document.querySelector('#city')
 
   const map = L.map('map');
 
   if (city.value) {
     fetcher(city.value, map)
     city.value = ""
+    
   } else {
     alert("Enter a city!")
     location.reload()
@@ -26,7 +27,7 @@ input_form.addEventListener('submit', (event) => {
 
 // fetching function
 const fetcher = (address, map) => {
-  fetch("/weather?address=" + address).then((response) => {
+  fetch("http://localhost:3000/weather?address=" + address).then((response) => {
     response.json().then((data) => {
 
       console.log(data)
@@ -49,17 +50,6 @@ const fetcher = (address, map) => {
       });
 
       L.marker([lat, lon], { icon: myIcon }).addTo(map);
-
-      // temperature map
-      const temp_map = L.tileLayer(
-        'https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ "b285c38e2c37f96165ca9f53bdd78bb5",
-      {
-        maxZoom: 19,
-        opacity: 0.6,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      });
-
-      temp_map.addTo(map)
 
     })
   })
