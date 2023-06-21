@@ -1,5 +1,9 @@
-import 'dotenv/config'
-require('dotenv').config({path:"../.env"})
+// import 'dotenv/config'
+// require('dotenv').config({path:"../.env"})
+import dotenv from 'dotenv'
+const {config} = dotenv
+config({path:"../"})
+
 
 import express from 'express'
 const { static : as_static } = express
