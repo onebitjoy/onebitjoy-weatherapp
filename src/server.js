@@ -2,7 +2,7 @@
 // require('dotenv').config({path:"../.env"})
 import dotenv from 'dotenv'
 const {config} = dotenv
-config({path:"../"})
+config({path:"../.env"})
 
 
 import express from 'express'
