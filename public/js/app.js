@@ -25,7 +25,7 @@ input_form.addEventListener('submit', (event) => {
 // fetching function
 const fetcher = (address, map) => {
 
-  fetch("http://localhost:3000/weather?address=" + address).then((response) => {
+  fetch("/weather?address=" + address).then((response) => {
     response.json().then((data) => {
 
       const { lat, lon } = data.coord
