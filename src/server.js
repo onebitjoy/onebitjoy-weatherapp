@@ -1,4 +1,5 @@
-import express, { static as as_static } from 'express'
+import express from 'express'
+const { static : as_static } = express
 const app = express()
 import { geocode } from './utils/geocoding.js'
 import {weather_func } from './utils/weather.js'
