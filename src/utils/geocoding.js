@@ -1,9 +1,8 @@
-const request = require('postman-request')
+import request from 'request';
 const geocoding_city = (city = "", callback) => {
 
-    const geo_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(city) + '.json?' + 'proximity=ip' + '&access_token=' + process.env.mapbox_key+ '&limit=1'
+    const geo_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(city) + '.json?' + 'proximity=ip' + '&access_token=' + process.env.MAPBOX_KEY + '&limit=1'
 
-    console.log(geo_url);
     request(geo_url, (error, response) => {
 
         if (error) {
@@ -24,7 +23,7 @@ const geocoding_city = (city = "", callback) => {
     })
 }
 
-export const geocode = geocoding_city
+export const geocode = geocoding_city;
 
 /*TEST*/
 // geocoding_city("prayagraj", (req, res) => {

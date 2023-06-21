@@ -8,7 +8,9 @@
   <title>Weather</title>
   <link rel="stylesheet" href="css\leaflet.css" />
   <link rel="stylesheet" href="css\mainstyle.css" />
-
+  <script>
+        window.process = { browser: true, env: { ENVIRONMENT: 'BROWSER' } };
+    </script>
 </head>
 
 <body>
@@ -35,7 +37,9 @@
     <script>
       const latitude = 28.70
       const longitude = 77.10
+
       const map = L.map('inmap')
+      
       map.setView([latitude, longitude], 4)
 
       const Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {

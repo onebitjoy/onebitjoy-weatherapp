@@ -1,6 +1,5 @@
 const input_form = document.querySelector('form')
 
-//hello
 // new map that will overlap the existing map
 // -----------------------------------------------
 input_form.addEventListener('submit', (event) => {
@@ -47,11 +46,11 @@ const fetcher = (address, map) => {
         iconSize: [40, 40],
       });
 
-      const marker = L.marker([lat, lon], { icon: myIcon }).addTo(map);
+      L.marker([lat, lon], { icon: myIcon }).addTo(map);
 
       // temperature map
       const temp_map = L.tileLayer('https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid={apikey}', {
-        apikey: process.env.ACCESS_KEY,
+        apikey: process.env.OPENWEATHERMAP_KEY,
         maxZoom: 19,
         opacity: 0.6,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
