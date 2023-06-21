@@ -49,8 +49,9 @@ const fetcher = (address, map) => {
       L.marker([lat, lon], { icon: myIcon }).addTo(map);
 
       // temperature map
-      const temp_map = L.tileLayer('https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ apikey, {
-        apikey: process.env.OPENWEATHERMAP_KEY,
+      const temp_map = L.tileLayer(
+        'https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ process.env.OPENWEATHERMAP_KEY,
+      {
         maxZoom: 19,
         opacity: 0.6,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
