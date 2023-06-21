@@ -29,6 +29,8 @@ const fetcher = (address, map) => {
   fetch("/weather?address=" + address).then((response) => {
     response.json().then((data) => {
 
+      log(data)
+
       const { lat, lon } = data.coord
       const { name } = data
 
@@ -50,7 +52,7 @@ const fetcher = (address, map) => {
 
       // temperature map
       const temp_map = L.tileLayer(
-        'https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ process.env.OPENWEATHERMAP_KEY,
+        'https://tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid='+ "b285c38e2c37f96165ca9f53bdd78bb5",
       {
         maxZoom: 19,
         opacity: 0.6,
