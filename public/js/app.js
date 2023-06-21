@@ -1,4 +1,7 @@
 const input_form = document.querySelector('form')
+import dotenv from 'dotenv'
+const config = dotenv.config()
+config({path:"./.env"})
 
 // new map that will overlap the existing map
 // -----------------------------------------------
