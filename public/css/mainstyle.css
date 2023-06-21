@@ -6,15 +6,18 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.map{
-  background:rgba(91, 213, 250, 0.74);
+.map {
+  background: rgba(91, 213, 250, 0.74);
 }
+
 .container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
+
 
 .overlay {
   height: 5%;
@@ -54,13 +57,14 @@
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
 }
 
 #submitbtn:hover {
   background-position: right center;
+  cursor: pointer;
 }
 
 #inside {
@@ -72,4 +76,19 @@
 #map {
   flex-grow: 1;
   width: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction:column ;
+  justify-content: center;
+  background: white;
+  color: #333;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.leaflet-popup-tip {
+  display: none;
 }

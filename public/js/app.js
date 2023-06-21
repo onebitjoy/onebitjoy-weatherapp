@@ -1,6 +1,6 @@
 const input_form = document.querySelector('.search')
 
-// new map that will overlap the existing map
+// new map
 // -----------------------------------------------
 input_form.addEventListener('submit', (event) => {
 
@@ -9,13 +9,10 @@ input_form.addEventListener('submit', (event) => {
   let city = document.querySelector('#city')
 
   const map = L.map('map');
-
   if (city.value) {
     fetcher(city.value, map)
     city.value = ""
-    
   } else {
-    alert("Enter a city!")
     location.reload()
   }
 
@@ -27,14 +24,15 @@ input_form.addEventListener('submit', (event) => {
 
 // fetching function
 const fetcher = (address, map) => {
-  fetch("/weather?address=" + address).then((response) => {
+
+  fetch("http://localhost:3000/weather?address=" + address).then((response) => {
     response.json().then((data) => {
 
       const { lat, lon } = data.coord
       const { name } = data
 
-      map.setView([lat, lon], 6)
-
+      map.setView([lat, lon], 4)
+      map.flyTo([lat, lon], 8)
       // base map
       const normal_map = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -46,6 +44,7 @@ const fetcher = (address, map) => {
         iconUrl: "images\\marker.png",
         iconSize: [40, 40],
       });
+
 
       L.marker([lat, lon], { icon: myIcon }).addTo(map);
 
