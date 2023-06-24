@@ -9,18 +9,60 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let popup = L.popup();
 
 async function onMapClick(e) {
-  
+
   const lat = e.latlng.lat
   const lon = e.latlng.lng
 
   map.flyTo([lat, lon], 8)
-  const data = fetch("/directweather?lat="+lat.toFixed(2) + "&lon=" + lon.toFixed(2))
+  const got_data = await fetch("/directweather?lat=" + lat.toFixed(2) + "&lon=" + lon.toFixed(2))
   console.log("longitude: " + e.latlng)
+
+  const data = got_data.json()
+
+  const myIcon = L.icon({
+      iconUrl: "images\\marker.png",
+      iconSize: [40, 40],
+    });
+    L.marker([lat, lon], { icon: myIcon }).addTo(map)
+
   popup
     .setLatLng(e.latlng)
-    .setContent(`Coordinates: ${e.latlng.lat.toFixed(2)}, ${e.latlng.lng.toFixed(2)}`)
+    .setContent(
+      `<div style="margin: 8px 0 10px 0; width:100%; height: 100%; font-size:0.8rem; font-weight: 600; display: flex; flex-direction: column;color:black; padding-right:10px">`
+      +
+
+        `<div style="font-size:1.5rem; text-align:left; font-weight:600; margin-left: 14px; color:black ;backgrorund-color:rgba(250,250,250,0.9)">`+
+          // `<img style="width:20px;height:20px;background-color: black;" src="https://openweathermap.org/img/wn/${(await (await data).weather[0]).icon}@2x.png">`+
+          ` ${(await data).name}` +
+          `<span style="text-transform: uppercase; font-size:0.8rem; color:gray;margin-left:8px ; font-weight:600"> ${(await data).sys.country}<span> ` +
+        `</div>\n` +
+        '<div style="height:2px; width: 100%; background-color:#d9d6d6 ;"></div>'
+        +
+
+        `<div style="margin:10px 10px 0 14px; flex-grow: 1; padding-bottom:10px;">`
+        +
+          `<div>`
+          +
+            `<div><span style="color:gray">WEATHER</span><span style="float:right;">${(await (await data).weather[0]).main}</span></div>` +
+            `<div><span style="color:gray">DESCRIPTION</span><span style="float:right;">${(await (await data).weather[0]).description}</span></div>` +
+            `<div><span style="color:gray">TEMPERATURE</span><span style="float:right;">${(await (await data).main).temp}&deg;C</span></div>\n` +
+            `<div><span style="color:gray">FEELS LIKE</span> <span style="float:right;">${(await (await data).main).feels_like}&deg;C</span></div>\n` +
+            `<div><span style="color:gray">PRESSURE</span> <span style="float:right;">${(await (await data).main).humidity} hPa</span></div>\n`
+            
+            +
+            `<div><span style="color:gray">VISIBILITY</span><span style="float:right;">${(await data).visibility}m</span></div>`
+            +
+            `<div><span style="color:gray">WIND SPEED</span><span style="float:right;">${(await (await data).wind).speed}m/s</span></div>\n`
+            +
+            `<div><span style="color:gray">TIMEZONE</span><span style="float:right;">${(await data).timezone / 3600} Hrs</span></div>\n`
+          +
+          `</div>`
+          +
+        `</div>`
+      +
+      `</div>`
+    )
     .openOn(map);
-  console.log((await (await data).json()).coord)
 }
 
 map.on('click', onMapClick);
@@ -49,12 +91,66 @@ async function mapper(event) {
       iconSize: [40, 40],
     });
     L.marker([lat, lon], { icon: myIcon }).addTo(map)
+
+    popup
+    .setLatLng([lat,lon])
+    .setContent(
+      `<div style="margin: 8px 0 10px 0; width:100%; height: 100%; font-size:0.8rem; font-weight: 600; display: flex; flex-direction: column;color:black; padding-right:10px">`
+      +
+
+        `<div style="font-size:1.5rem; text-align:left; font-weight:600; margin-left: 14px; color:black ;backgrorund-color:rgba(250,250,250,0.9)">`+
+          ` ${(await data).name}` +
+          `<span style="text-transform: uppercase; font-size:0.8rem; color:gray;margin-left:8px ; font-weight:600"> ${(await data).sys.country}<span> ` +
+        `</div>\n` +
+        '<div style="height:2px; width: 100%; background-color:#d9d6d6 ;"></div>'
+        +
+
+        `<div style="margin:10px 10px 0 14px; flex-grow: 1; padding-bottom:10px;">`
+        +
+          `<div>`
+          +
+            `<div><span style="color:gray">WEATHER</span><span style="float:right;">${(await (await data).weather[0]).main}</span></div>` +
+            `<div><span style="color:gray">DESCRIPTION</span><span style="float:right;">${(await (await data).weather[0]).description}</span></div>` +
+            `<div><span style="color:gray">TEMPERATURE</span><span style="float:right;">${(await (await data).main).temp}&deg;C</span></div>\n` +
+            `<div><span style="color:gray">FEELS LIKE</span> <span style="float:right;">${(await (await data).main).feels_like}&deg;C</span></div>\n` +
+            `<div><span style="color:gray">PRESSURE</span> <span style="float:right;">${(await (await data).main).humidity} hPa</span></div>\n`
+            
+            +
+            `<div><span style="color:gray">VISIBILITY</span><span style="float:right;">${(await data).visibility}m</span></div>`
+            +
+            `<div><span style="color:gray">WIND SPEED</span><span style="float:right;">${(await (await data).wind).speed}m/s</span></div>\n`
+            +
+            `<div><span style="color:gray">TIMEZONE</span><span style="float:right;">${(await data).timezone / 3600} Hrs</span></div>\n`
+          +
+          `</div>`
+          +
+        `</div>`
+      +
+      `</div>`
+    )
+    .openOn(map);
   }
 
   catch (error) {
 
     console.error("Can't access to the server. Possible Connection Loss.\n\n" + error)
-  
+
   }
   city.value = ""
 }
+
+
+
+          //   `<div><span style="color:gray">WEATHER:</span><span style="float:right;">${(await (await data).weather[0]).main}</spam></div>` +
+          //   `<div><span style="color:gray">DESCRIPTION:</span>${(await (await data).weather[0]).description}</div>` +
+          //   `<div><span style="color:gray">TEMPERATURE:</span> ${(await (await data).main).temp}&deg;C</div>\n` +
+          //   `<div><span style="color:gray">FEELS LIKE:</span> ${(await (await data).main).feels_like}&deg;C</div>\n` +
+          //   `<div><span style="color:gray">PRESSURE:</span> ${(await (await data).main).humidity} hPa</div>\n`
+            
+          //   +
+          //   `<div><span style="color:gray">VISIBILITY: </span> ${(await data).visibility}m</div>`
+          //   +
+          //   `<div><span style="color:gray">WIND SPEED:</span> ${(await (await data).wind).speed}m/s</div>\n`
+          //   +
+          //   `<div><span style="color:gray">TIMEZONE:</span> ${(await data).timezone / 3600} Hrs</div>\n`
+          // +
