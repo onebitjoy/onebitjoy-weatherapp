@@ -1,7 +1,7 @@
 import express from 'express'
 const { static: as_static } = express
 const app = express()
-import { weather_func } from './utils/weather.js'
+import { weather_click, weather_func } from './utils/weather.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import hbs from 'hbs'
@@ -41,6 +41,16 @@ app.get(
     }
 
     const response = await weather_func(req.query.address)
+    res.send(await response)
+
+  }
+)
+
+app.get(
+  '/directweather',
+  async (req, res) => {
+
+    const response = await weather_click(req.query.lat, req.query.lon)
     res.send(await response)
 
   }

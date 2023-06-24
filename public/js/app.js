@@ -1,53 +1,60 @@
 const input_form = document.querySelector('.search')
 
+let map = L.map('map').setView([51.505, -0.09], 4);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+let popup = L.popup();
+
+async function onMapClick(e) {
+  
+  const lat = e.latlng.lat
+  const lon = e.latlng.lng
+
+  map.flyTo([lat, lon], 8)
+  const data = fetch("/directweather?lat="+lat.toFixed(2) + "&lon=" + lon.toFixed(2))
+  console.log("longitude: " + e.latlng)
+  popup
+    .setLatLng(e.latlng)
+    .setContent(`Coordinates: ${e.latlng.lat.toFixed(2)}, ${e.latlng.lng.toFixed(2)}`)
+    .openOn(map);
+  console.log((await (await data).json()).coord)
+}
+
+map.on('click', onMapClick);
+
 // new map
 // -----------------------------------------------
-input_form.addEventListener('submit', (event) => {
+input_form.addEventListener('submit', mapper)
+
+async function mapper(event) {
 
   event.preventDefault()
 
   let city = document.querySelector('#city')
 
-  const map = L.map('map');
-  if (city.value) {
-    fetcher(city.value, map)
-    city.value = ""
-  } else {
-    location.reload()
+  try {
+
+    const response = fetch("/weather?address=" + city.value)
+    const data = (await response).json()
+    const { lat, lon } = (await data).coord
+
+    map.setView([lat, lon], 4)
+    map.flyTo([lat, lon], 8)
+
+    var myIcon = L.icon({
+      iconUrl: "images\\marker.png",
+      iconSize: [40, 40],
+    });
+    L.marker([lat, lon], { icon: myIcon }).addTo(map)
   }
 
-  input_form.addEventListener('submit', () => {
-    location.reload()
-  })
-}
-)
+  catch (error) {
 
-// fetching function
-const fetcher = async (address, map) => {
-
-  fetch("/weather?address=" + address)
-    .then((response) => response.json())
-    .then((data) => {
-      const { lat, lon } = data.coord
-
-      map.setView([lat, lon], 4)
-      map.flyTo([lat, lon], 8)
-
-      console.log(address);
-      const normal_map = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })
-      normal_map.addTo(map);
-
-      var myIcon = L.icon({
-        iconUrl: "images\\marker.png",
-        iconSize: [40, 40],
-      });
-
-
-      L.marker([lat, lon], { icon: myIcon }).addTo(map);
-
-    })
-
+    console.error("Can't access to the server. Possible Connection Loss.\n\n" + error)
+  
+  }
+  city.value = ""
 }
