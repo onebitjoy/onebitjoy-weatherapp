@@ -1,12 +1,11 @@
 import express from 'express'
-const { static : as_static } = express
+const { static: as_static } = express
 const app = express()
-import { geocode } from './utils/geocoding.js'
-import {weather_func } from './utils/weather.js'
+import { weather_func } from './utils/weather.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import hbs from 'hbs'
-const {registerPartials} = hbs
+const { registerPartials } = hbs
 import { log } from 'console'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,29 +32,22 @@ app.get('', (req, res) => {
 })
 
 // WEATHER
-app.get('/weather', (req, res) => {
+app.get(
+  '/weather',
+  async (req, res) => {
 
-  if (!req.query.address) {
-    return res.send({ error: "Please provide an address!" })
+    if (!req.query.address) {
+      return res.send({ error: "Please provide an address!" })
+    }
+
+    const response = await weather_func(req.query.address)
+    res.send(await response)
+
   }
+)
 
-  geocode(req.query.address,
-    (error, { longitude, latitude, placename } = {}
-    ) => {
-      if (error) {
-        return res.send({ error })
-      }
-
-      weather_func({ longitude, latitude, placename } , (error , weather_response) => {
-        res.send(weather_response);
-      })
-
-    })
-
-})
-
-app.get('*' , (req, res) => {
-    res.render('404page')
+app.get('*', (req, res) => {
+  res.render('404page')
 })
 
 // PORT listening

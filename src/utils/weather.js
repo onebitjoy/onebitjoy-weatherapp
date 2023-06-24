@@ -1,25 +1,22 @@
-import request from 'request'
-import { error } from 'console'
 
-const weather = (geo_data, callback) => {
+async function weather(city) {
 
-    const { longitude, latitude, placename } = geo_data
-    const base_url = "https://api.openweathermap.org/data/2.5/weather?"
-    const url = `${base_url}lat=${latitude}&lon=${longitude}&appid=${process.env.OPENWEATHERMAP_KEY}&units=metric`
+    const mapbox_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(city) + '.json?' + 'proximity=ip' + '&access_token=' + process.env.MAPBOX_KEY + '&limit=1';
 
-    request({ uri: url, json: true }, (request_error, response) => {
+    const coordinates = fetch(mapbox_url)
+        .then((response) => response.json())
+        .then((data) => data.features[0])
+        .then((feature) => [feature.center[0], feature.center[1]] )
+        .catch((err) =>
+            console.log("Error: " + err)
+        )
 
-        if (request_error) {
-            error("Can't connect to the services!")
-        }
-        else {
+    const owm_url = `https://api.openweathermap.org/data/2.5/weather?lat=${(await coordinates)[1]}&lon=${(await coordinates)[0]}&appid=${process.env.OPENWEATHERMAP_KEY}&units=metric`
 
-            const data = response.body
+    const data = fetch(owm_url)
+    const result = (await data).json()
 
-            callback(undefined, data)
-        }
-
-    })
+    return (await result);
 }
 
 export const weather_func = weather

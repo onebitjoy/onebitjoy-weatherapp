@@ -23,17 +23,17 @@ input_form.addEventListener('submit', (event) => {
 )
 
 // fetching function
-const fetcher = (address, map) => {
+const fetcher = async (address, map) => {
 
-  fetch("/weather?address=" + address).then((response) => {
-    response.json().then((data) => {
-
+  fetch("/weather?address=" + address)
+    .then((response) => response.json())
+    .then((data) => {
       const { lat, lon } = data.coord
-      const { name } = data
 
       map.setView([lat, lon], 4)
       map.flyTo([lat, lon], 8)
-      // base map
+
+      console.log(address);
       const normal_map = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -49,5 +49,5 @@ const fetcher = (address, map) => {
       L.marker([lat, lon], { icon: myIcon }).addTo(map);
 
     })
-  })
+
 }
