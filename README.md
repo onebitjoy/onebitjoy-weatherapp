@@ -6,7 +6,7 @@ A working application is being deployed on the render website _( The first full 
 
 https://onebitjoy-weatherium.onrender.com/
 
-![weatherium](https://github.com/onebitjoy/onebitjoy-weatherapp/assets/95994085/1323fa86-8c22-49e0-af5f-acd7fd9c5ca6)
+![weatherium](https://github.com/onebitjoy/onebitjoy-weatherapp/assets/95994085/fe8e6783-49f9-4be6-9fdb-febae6cae97d)
 
 ## Usage Methods -
 1. After the website fully loads in, you can zoom-in/zoom-out and click anywhere on the map to open a popup(provided by leafletjs) that will display the weather where you clicked.
@@ -32,5 +32,4 @@ https://onebitjoy-weatherium.onrender.com/
 
 ## A distinctive looking customized Page Not Found Error page -
 
-![image](https://github.com/onebitjoy/onebitjoy-weatherapp/assets/95994085/24d984b6-1a3b-4bda-9ae4-8d79404b1773)
-
+![image](https://github.com/onebitjoy/onebitjoy-weatherapp/assets/95994085/156eeced-db16-4699-a71f-2ffb13c8e774)
