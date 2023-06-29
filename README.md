@@ -2,7 +2,8 @@
 
 A beautiful and pragmatic application built using Node.js + Express.js.
 
-A working application is being deployed on the render website -
+A working application is being deployed on the render website _( The first full load of the website will be slow because render.com actually shuts down any unusable machine if it's not being used for 15 minutes, hence to save resources and themselves from Distributed Denial of Service attacks[DDoS] )_ -
+
 https://onebitjoy-weatherium.onrender.com/
 
 ![weatherium](https://github.com/onebitjoy/onebitjoy-weatherapp/assets/95994085/1323fa86-8c22-49e0-af5f-acd7fd9c5ca6)
